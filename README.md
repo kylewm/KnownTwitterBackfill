@@ -10,4 +10,4 @@ Current Limitations:
 - Checks only the most recent 200 tweets. Does not backfill your historical tweets, although this would be a reasonable feature to add.
 - Does not fetch likes.
 - No special handling for photos. They are posted as a Status with a link to a twitter photo.
-- No special handling for retweets. They are posted as notes starting with "RT @-username"
+- No special handling for retweets. They are posted as a Status starting with "RT @-username"
