@@ -15,6 +15,8 @@ class Cron extends Page
 
     function post()
     {
+        set_time_limit(600); // 10 minutes should be enough
+
         $twitterPlugin = Idno::site()->plugins()->Twitter;
 
         if (!$twitterPlugin) {
@@ -109,8 +111,14 @@ class Cron extends Page
         $note->created = $created;
         $note->body = $text;
         $note->setPosseLink('twitter', $tweetUrl, '@'.$username, $id, $username);
+
+        // disable PuSH during backfill
+        $savedHub = Idno::site()->config()->hub;
+        Idno::site()->config()->hub = false;
+
         $note->publish(true);
 
+        Idno::site()->config()->hub = $savedHub;
         Idno::site()->logging()->debug("created new note: " . $note->getURL());
     }
 
