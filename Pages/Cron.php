@@ -112,13 +112,14 @@ class Cron extends Page
         $note->body = $text;
         $note->setPosseLink('twitter', $tweetUrl, '@'.$username, $id, $username);
 
-        // disable PuSH during backfill
-        $savedHub = Idno::site()->config()->hub;
-        Idno::site()->config()->hub = false;
+        // uncomment to disable PuSH during backfill
+        // $savedHub = Idno::site()->config()->hub;
+        // Idno::site()->config()->hub = false;
 
         $note->publish(true);
 
-        Idno::site()->config()->hub = $savedHub;
+        // uncomment to disable PuSH during backfill
+        // Idno::site()->config()->hub = $savedHub;
         Idno::site()->logging()->debug("created new note: " . $note->getURL());
     }
 
